@@ -54,27 +54,23 @@
 					<h5>Shipping Details</h5> {{-- Shipping address --}}
 
 					<div class="form-group">
-						<input type="text" class="form-control" id="name" name="name" placeholder="Name:" required>
+						<input type="text" class="form-control" id="shipping_name" name="shipping_name" placeholder="Name:" required>
 					</div>
 
 					<div class="form-group">
-						<input type="email" class="form-control" id="email" name="email" placeholder="Email:" required>
+						<input type="email" class="form-control" id="shipping_email" name="shipping_email" placeholder="Email:" required>
 					</div>
 
 					<div class="form-group">
-						<input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number:" required>
+						<input type="text" class="form-control" id="shipping_phone" name="shipping_phone" placeholder="Phone Number:" required>
 					</div>
 
 					<div class="form-group">
-						<input type="text" class="form-control" id="city" name="city" placeholder="City:" required>
+						<input type="text" class="form-control" id="shipping_city" name="shipping_city" placeholder="City:" required>
 					</div>
 
-					{{--<div class="form-group">--}}
-						{{--<textarea class="form-control" rows="5" id="address" name="address" placeholder="Address:" required></textarea>--}}
-					{{--</div>--}}
-
 					<div class="form-group">
-						<input type="text" class="form-control" id="address" name="address" placeholder="Address:" required>
+						<input type="text" class="form-control" id="shipping_address" name="shipping_address" placeholder="Address:" required>
 					</div>
 
 					<h5>Credit or debit card</h5>
@@ -173,9 +169,9 @@
 			$('#payment_submit_btn').prop('disabled', true);
 
             var options = {
-                name : document.getElementById('name').value,
-                address_city : document.getElementById('city').value,
-                address_line1 : document.getElementById('address').value
+                name : document.getElementById('shipping_name').value,
+                address_city : document.getElementById('shipping_city').value,
+                address_line1 : document.getElementById('shipping_address').value
 			};
 
             stripe.createToken(card).then(function(result) {

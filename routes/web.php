@@ -19,21 +19,17 @@ Route::put('/update-cart/{rowID}', 'CartController@update_cart');
 
 // Checkout
 Route::get('/checkout', 'CheckoutController@index');
-Route::post('/checkout', 'CheckoutController@checkoutPost')->name('checkout.post');
-Route::get('/checkoutPayment', function(){ return view('checkoutPayment'); });
+Route::post('/checkout', 'CheckoutController@checkout');
 
 
-
-
-//       Customer Authentication Routes
-//-----------------------------------------------
+// Customer Authentication & Registration Routes
 Route::get('/customer/login', 'Auth\CustomerAuthController@showCustomerLoginForm')->name('customer-login');
 Route::post('/customer/login', 'Auth\CustomerAuthController@customerLogin');
 Route::get('/customer/logout', 'Auth\CustomerAuthController@customerLogout')->name('customer-logout');
-
-// Registration Routes...
 Route::get('/customer/register', 'Auth\CustomerAuthController@showCustomerLoginForm')->name('customer-register');
 Route::post('/customer/register', 'Auth\CustomerAuthController@registerCustomer');
+
+
 
 
 
@@ -43,18 +39,15 @@ Route::post('/customer/register', 'Auth\CustomerAuthController@registerCustomer'
 
 Auth::routes();
 
-
-
 Route::get('/admin', 'DashboardController@index');
 Route::get('/dashboard', 'DashboardController@index');
 Route::get('/dashboard/charts', 'DashboardController@charts');
 Route::get('/dashboard/tables', 'DashboardController@tables');
 
-
+// Users CRUD
 Route::resource('users', 'UserController');
 Route::resource('roles', 'RoleController');
 Route::resource('permissions', 'PermissionController');
-
 
 // Category CRUD
 Route::resource('category', 'CategoryController');
