@@ -5,8 +5,8 @@
                 <div class="col-sm-6">
                     <div class="contactinfo">
                         <ul class="nav nav-pills">
-                            <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i> +880 1732 481483</a></li>
+                            <li><a href="#"><i class="fa fa-smile-o" aria-hidden="true"></i> nahid.work</a></li>
                         </ul>
                     </div>
                 </div>
@@ -108,19 +108,10 @@
                             <li><a href="/home" class="active">Home</a></li>
                             <li class="dropdown"><a href="/#">Shop<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="/shop">Products</a></li>
-                                    <li><a href="/product-details">Product Details</a></li> 
-                                    <li><a href="/checkout">Checkout</a></li> 
-                                    <li><a href="/cart">Cart</a></li> 
-                                    <li><a href="/customer/login">Login</a></li>
+                                    <li><a href="#">Products</a></li>
+                                    <li><a href="#">Product Details</a></li>
                                 </ul>
-                            </li> 
-                            <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="/blog">Blog List</a></li>
-                                    <li><a href="/blog-single">Blog Single</a></li>
-                                </ul>
-                            </li> 
+                            </li>
                             {{-- <li><a href="/404">404</a></li> --}}
                             <li><a href="/contact">Contact</a></li>
                         </ul>

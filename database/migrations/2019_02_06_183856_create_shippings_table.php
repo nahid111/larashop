@@ -16,11 +16,11 @@ class CreateShippingsTable extends Migration
         Schema::create('shippings', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('order_id');
-            $table->string('Shipping_name');
-            $table->string('Shipping_email');
-            $table->string('Shipping_phone');
-            $table->string('Shipping_city');
-            $table->string('Shipping_address');
+            $table->string('shipping_name');
+            $table->string('shipping_email');
+            $table->string('shipping_phone');
+            $table->string('shipping_city');
+            $table->string('shipping_address');
             $table->string('name_on_card');
             $table->timestamps();
         });

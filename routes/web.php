@@ -57,5 +57,8 @@ Route::resource('brand', 'BrandController');
 Route::resource('product', 'ProductController');
 // Slider CRUD
 Route::resource('slider', 'SliderController');
+// ORDERS
+Route::get('/orders', 'OrdersController@index');
+Route::get('/orders/{orderID}', 'OrdersController@order_details');
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 01, 2019 at 05:12 AM
+-- Generation Time: Feb 06, 2019 at 11:40 AM
 -- Server version: 5.7.23
 -- PHP Version: 7.1.21
 
@@ -75,6 +75,18 @@ INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -96,7 +108,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (5, '2019_01_18_181323_create_products_table', 4),
 (6, '2019_01_18_185500_create_products_table', 5),
 (7, '2019_01_20_090216_create_sliders_table', 6),
-(8, '2019_01_29_121304_create_permission_tables', 7);
+(8, '2019_01_29_121304_create_permission_tables', 7),
+(9, '2019_01_31_054835_create_customers_table', 8),
+(10, '2019_02_06_132622_create_orders_table', 8),
+(11, '2019_02_06_132659_create_order_details_table', 8),
+(12, '2019_02_06_132739_create_shippings_table', 8),
+(13, '2019_02_06_152541_create_order_details_table', 9),
+(14, '2019_02_06_183856_create_shippings_table', 10);
 
 -- --------------------------------------------------------
 
@@ -133,6 +151,55 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (2, 'App\\User', 6),
 (4, 'App\\User', 7),
 (4, 'App\\User', 10);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `total` double(8,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `total`, `created_at`, `updated_at`) VALUES
+(4, 10, 563.50, '2019-02-06 12:45:56', '2019-02-06 12:45:56'),
+(5, 10, 4600.00, '2019-02-06 13:09:25', '2019-02-06 13:09:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_details`
+--
+
+CREATE TABLE `order_details` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_price` double(8,2) NOT NULL,
+  `product_qty` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `product_name`, `product_price`, `product_qty`, `created_at`, `updated_at`) VALUES
+(5, 4, 22, '3310', 80.00, 3, '2019-02-06 12:45:56', '2019-02-06 12:45:56'),
+(6, 4, 16, 'Galaxy Gear', 250.00, 1, '2019-02-06 12:45:56', '2019-02-06 12:45:56'),
+(7, 5, 19, 'G7', 1000.00, 1, '2019-02-06 13:09:25', '2019-02-06 13:09:25'),
+(8, 5, 23, 'Galaxy S9', 1500.00, 2, '2019-02-06 13:09:25', '2019-02-06 13:09:25');
 
 -- --------------------------------------------------------
 
@@ -254,6 +321,33 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `shippings`
+--
+
+CREATE TABLE `shippings` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `shipping_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shipping_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shipping_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shipping_city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shipping_address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_on_card` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `shippings`
+--
+
+INSERT INTO `shippings` (`id`, `order_id`, `shipping_name`, `shipping_email`, `shipping_phone`, `shipping_city`, `shipping_address`, `name_on_card`, `created_at`, `updated_at`) VALUES
+(1, 4, 'Mr. Receiver', 'mr@receiver.com', '987654321', 'Dhaka', 'Kolabagan, Dhanmondi', 'Mr. Developer', '2019-02-06 12:45:56', '2019-02-06 12:45:56'),
+(2, 5, 'Someone', 'someone@somewhere.com', '123654789', 'NewYork', 'USA', 'Nahid', '2019-02-06 13:09:25', '2019-02-06 13:09:25');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sliders`
 --
 
@@ -294,10 +388,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(5, 'Muhammad Nahid', 'admin@system.com', NULL, '$2y$10$/G.iNla0ECPOUaMUPQLCk.ZWlFM/dDYIHNbE8mCfqzAhRPiHIoBJW', 'cn6WcD9miBNKSiFtZF3iZqtd3aayWBnB20merMOHmTzzwPIpybfiyy4cyd6R', '2019-01-30 06:56:33', '2019-01-30 06:56:59'),
+(5, 'Muhammad Nahid', 'admin@system.com', NULL, '$2y$10$/G.iNla0ECPOUaMUPQLCk.ZWlFM/dDYIHNbE8mCfqzAhRPiHIoBJW', 'bhmmLJbwcJjjFy5Vr5Ai6Idd8Cf0NVysw9vDmUne7ON45iGp1DUMprmQaR7z', '2019-01-30 06:56:33', '2019-01-30 06:56:59'),
 (6, 'Mr. X', 'test@user.com', NULL, '$2y$10$if9ukahS.7I4p47wOBfBIugVVjmtz1KgMOdSPj7VNhWcF0PT1nwN6', 'M3iGs4CKIpyMPEwGyGionfhTXbvVZPusiVZtXPQ8e6ptzlmBmwNNXMpOebVT', '2019-01-30 06:58:07', '2019-01-30 06:58:07'),
 (7, 'Random Customer', 'customer@random.com', NULL, '$2y$10$.G.eyhdg0CmEfVfy58i.6Ordr9paWoXufWMKsLnpb/AODE5ZVfOrq', NULL, '2019-01-31 09:26:46', '2019-01-31 09:26:46'),
-(10, 'Test User', 'user@system.com', NULL, '$2y$10$k6VRnSCrHOS1hTbN1MXvE.0tOEOpNmMW/nUiEDZIkwjH7X3n4C8uW', 'jXYxv5VL1qpnrsIanQFVRK61ZxIKpcz4nJhv2BNGpZ342BJARP5q0zHrchKm', '2019-01-31 13:31:07', '2019-01-31 13:31:07');
+(10, 'Test User', 'user@system.com', NULL, '$2y$10$k6VRnSCrHOS1hTbN1MXvE.0tOEOpNmMW/nUiEDZIkwjH7X3n4C8uW', 'fgU9J10ltwx5Ydf7gqc3v3kfoEBseX6bQ38RjobDOqh53xhTGSnhIRovmdEW', '2019-01-31 13:31:07', '2019-01-31 13:31:07');
 
 --
 -- Indexes for dumped tables
@@ -313,6 +407,12 @@ ALTER TABLE `brands`
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -334,6 +434,18 @@ ALTER TABLE `model_has_permissions`
 ALTER TABLE `model_has_roles`
   ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
   ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_details`
+--
+ALTER TABLE `order_details`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `password_resets`
@@ -367,6 +479,12 @@ ALTER TABLE `role_has_permissions`
   ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
 
 --
+-- Indexes for table `shippings`
+--
+ALTER TABLE `shippings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sliders`
 --
 ALTER TABLE `sliders`
@@ -396,9 +514,27 @@ ALTER TABLE `categories`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `order_details`
+--
+ALTER TABLE `order_details`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
@@ -420,10 +556,16 @@ ALTER TABLE `roles`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `shippings`
+--
+ALTER TABLE `shippings`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `sliders`
 --
 ALTER TABLE `sliders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`

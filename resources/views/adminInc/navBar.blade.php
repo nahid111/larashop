@@ -47,6 +47,13 @@
                     </a>
                 </li>
 
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Orders">
+                    <a class="nav-link" href="{{ url('/orders') }}">
+                        <i class="fa fa-fw fa-gift"></i>
+                        <span class="nav-link-text">Orders</span>
+                    </a>
+                </li>
+
 
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Slider">
                     <a class="nav-link" href="{{ url('/slider') }}">
@@ -62,16 +69,16 @@
                     </a>
                 </li>
 
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Products">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Categories">
                     <a class="nav-link" href="{{ url('/category') }}">
-                        <i class="fa fa-fw fa-area-chart"></i>
+                        <i class="fa fa-fw fa-sitemap"></i>
                         <span class="nav-link-text">Categories</span>
                     </a>
                 </li>
 
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Brands">
                     <a class="nav-link" href="{{ url('/brand') }}">
-                        <i class="fa fa-fw fa-shopping-bag"></i>
+                        <i class="fa fa-fw fa-apple"></i>
                         <span class="nav-link-text">Brands</span>
                     </a>
                 </li>
